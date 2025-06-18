@@ -3,10 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+/* Import Google Fonts - Adding more stylish fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
-/* Definition of the design system with warm beige-pink-brown palette */
+/* Definition of the design system with enhanced warm beige-pink-brown palette */
 
 @layer base {
   :root {
@@ -19,24 +19,24 @@
     --popover: 40 50% 98%;
     --popover-foreground: 20 19% 19%;
 
-    --primary: 29 38% 51%; /* #A47148 - Blush Brown */
+    --primary: 345 65% 65%; /* #E095A3 - Enhanced Dusty Rose Pink */
     --primary-foreground: 40 50% 98%;
 
-    --secondary: 0 29% 91%; /* #F7CACA - Soft Pink */
+    --secondary: 345 55% 85%; /* #F2C2CC - Soft Blush Pink */
     --secondary-foreground: 20 19% 19%;
 
-    --muted: 20 29% 81%; /* #E6B8A2 - Muted Rose */
+    --muted: 15 35% 78%; /* #D4B5A0 - Warm Muted Rose */
     --muted-foreground: 20 19% 35%;
 
-    --accent: 0 29% 91%; /* #F7CACA - Soft Pink */
+    --accent: 340 60% 80%; /* #EAB3C1 - Gentle Rose */
     --accent-foreground: 20 19% 19%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 20 29% 81%;
-    --input: 20 29% 81%;
-    --ring: 29 38% 51%;
+    --border: 345 40% 82%;
+    --input: 345 40% 82%;
+    --ring: 345 65% 65%;
 
     --radius: 0.75rem;
   }
@@ -52,7 +52,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-poppins;
+    @apply font-playfair;
   }
 }
 
@@ -62,7 +62,7 @@
   }
   
   .btn-secondary {
-    @apply bg-secondary text-secondary-foreground hover:bg-muted px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 border border-muted;
+    @apply bg-secondary text-secondary-foreground hover:bg-accent px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 border border-accent;
   }
   
   .section-padding {

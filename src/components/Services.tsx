@@ -1,11 +1,11 @@
 
 import { Card } from "@/components/ui/card";
-import { Code, Html, Services, Briefcase, Github, User } from "lucide-react";
+import { Code, Monitor, Server, Briefcase, Github, User } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      icon: Html,
+      icon: Monitor,
       title: "Custom Website Development",
       description: "Building responsive, modern websites tailored to your specific needs and business goals.",
       features: ["Responsive Design", "SEO Optimized", "Fast Loading"]
@@ -17,7 +17,7 @@ const Services = () => {
       features: ["React.js", "Responsive UI", "Modern Design"]
     },
     {
-      icon: Services,
+      icon: Server,
       title: "Backend Development & APIs",
       description: "Developing robust server-side applications and RESTful APIs for seamless data management.",
       features: ["Node.js", "Express.js", "Database Design"]

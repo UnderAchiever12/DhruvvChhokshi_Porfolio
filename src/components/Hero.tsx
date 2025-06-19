@@ -27,8 +27,7 @@ const Hero = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.8
       }
     }
   };
@@ -40,8 +39,7 @@ const Hero = () => {
       scale: 1,
       rotate: 0,
       transition: {
-        duration: 1,
-        ease: "easeOut"
+        duration: 1
       }
     }
   };
@@ -51,8 +49,7 @@ const Hero = () => {
       y: [-10, 10, -10],
       transition: {
         duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
+        repeat: Infinity
       }
     }
   };
@@ -75,7 +72,7 @@ const Hero = () => {
               <motion.span 
                 className="text-primary"
                 whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ type: "spring" as const, stiffness: 300 }}
               >
                 Dhruvv Chhokshi
               </motion.span>
@@ -135,7 +132,7 @@ const Hero = () => {
               <motion.div 
                 className="w-80 h-80 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-secondary to-muted overflow-hidden border-8 border-card shadow-2xl"
                 whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ type: "spring" as const, stiffness: 300 }}
               >
                 <img 
                   src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face"

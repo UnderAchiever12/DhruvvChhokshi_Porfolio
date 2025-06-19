@@ -45,8 +45,7 @@ const Projects = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.8
       }
     }
   };
@@ -82,7 +81,7 @@ const Projects = () => {
               variants={projectVariants}
               whileHover={{ 
                 y: -10,
-                transition: { type: "spring", stiffness: 300, damping: 10 }
+                transition: { type: "spring" as const, stiffness: 300, damping: 10 }
               }}
             >
               <Card className="overflow-hidden bg-background border-muted hover:shadow-2xl transition-all duration-300 group h-full">
@@ -133,7 +132,7 @@ const Projects = () => {
                           backgroundColor: "hsl(var(--primary))",
                           color: "hsl(var(--primary-foreground))"
                         }}
-                        transition={{ type: "spring", stiffness: 400 }}
+                        transition={{ type: "spring" as const, stiffness: 400 }}
                       >
                         {tech}
                       </motion.span>

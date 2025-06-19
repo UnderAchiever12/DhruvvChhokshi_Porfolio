@@ -2,6 +2,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Projects = () => {
   const projects = [
@@ -28,77 +29,168 @@ const Projects = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const projectVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <section id="projects" className="section-padding bg-card">
       <div className="container-max">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <h2 className="text-4xl md:text-5xl font-poppins font-bold text-foreground mb-6">
             Featured Projects
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Real-world solutions showcasing my technical expertise and problem-solving abilities
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {projects.map((project, index) => (
-            <Card 
+            <motion.div
               key={index}
-              className="overflow-hidden bg-background border-muted hover:shadow-xl transition-all duration-300 hover:scale-105 group animate-fade-in"
-              style={{ animationDelay: `${index * 0.2}s` }}
+              variants={projectVariants}
+              whileHover={{ 
+                y: -10,
+                transition: { type: "spring", stiffness: 300, damping: 10 }
+              }}
             >
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-poppins font-semibold text-foreground mb-3">
-                  {project.title}
-                </h3>
+              <Card className="overflow-hidden bg-background border-muted hover:shadow-2xl transition-all duration-300 group h-full">
+                <motion.div 
+                  className="relative overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img 
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <motion.div 
+                    className="absolute inset-0 bg-primary/20"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
                 
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex}
-                      className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                <div className="p-6">
+                  <motion.h3 
+                    className="text-xl font-poppins font-semibold text-foreground mb-3"
+                    whileHover={{ color: "hsl(var(--primary))" }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {project.title}
+                  </motion.h3>
+                  
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <motion.div 
+                    className="flex flex-wrap gap-2 mb-4"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    {project.tech.map((tech, techIndex) => (
+                      <motion.span 
+                        key={techIndex}
+                        className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium"
+                        whileHover={{ 
+                          scale: 1.1,
+                          backgroundColor: "hsl(var(--primary))",
+                          color: "hsl(var(--primary-foreground))"
+                        }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        {tech}
+                      </motion.span>
+                    ))}
+                  </motion.div>
 
-                <div className="space-y-1 mb-6">
-                  {project.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center text-sm">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
-                      <span className="text-foreground/80">{feature}</span>
-                    </div>
-                  ))}
+                  <div className="space-y-1 mb-6">
+                    {project.features.map((feature, featureIndex) => (
+                      <motion.div 
+                        key={featureIndex} 
+                        className="flex items-center text-sm"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: featureIndex * 0.1 }}
+                      >
+                        <motion.div 
+                          className="w-1.5 h-1.5 bg-primary rounded-full mr-2"
+                          animate={{ scale: [1, 1.3, 1] }}
+                          transition={{ 
+                            repeat: Infinity,
+                            duration: 2,
+                            delay: featureIndex * 0.3
+                          }}
+                        />
+                        <span className="text-foreground/80">{feature}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <motion.div 
+                      className="flex-1"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button size="sm" variant="outline" className="w-full">
+                        <Github className="w-4 h-4 mr-2" />
+                        Code
+                      </Button>
+                    </motion.div>
+                    <motion.div 
+                      className="flex-1"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button size="sm" className="w-full">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Live Demo
+                      </Button>
+                    </motion.div>
+                  </div>
                 </div>
-                
-                <div className="flex gap-3">
-                  <Button size="sm" variant="outline" className="flex-1">
-                    <Github className="w-4 h-4 mr-2" />
-                    Code
-                  </Button>
-                  <Button size="sm" className="flex-1">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Live Demo
-                  </Button>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

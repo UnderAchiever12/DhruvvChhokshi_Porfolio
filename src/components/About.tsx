@@ -51,10 +51,10 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-poppins font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-cormorant font-bold text-foreground mb-6">
             About Me
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-montserrat">
             Passionate about creating digital solutions that make a difference
           </p>
         </motion.div>
@@ -68,7 +68,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.p 
-              className="text-lg text-foreground/80 leading-relaxed"
+              className="text-lg text-foreground/80 leading-relaxed font-source"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -77,7 +77,7 @@ const About = () => {
               I'm a dedicated full-stack developer with a passion for creating clean, efficient, and user-friendly web applications. My journey in tech began during my B.Tech in ICT at DA-IICT, where I discovered my love for problem-solving through code.
             </motion.p>
             <motion.p 
-              className="text-lg text-foreground/80 leading-relaxed"
+              className="text-lg text-foreground/80 leading-relaxed font-source"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -86,7 +86,7 @@ const About = () => {
               Over the past 2 years, I've gained valuable experience working with modern technologies and frameworks, from building responsive frontends with React to developing robust backends with Node.js and managing data with MongoDB and Firebase.
             </motion.p>
             <motion.p 
-              className="text-lg text-foreground/80 leading-relaxed"
+              className="text-lg text-foreground/80 leading-relaxed font-source"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -105,33 +105,33 @@ const About = () => {
           >
             <motion.div variants={cardVariants}>
               <Card className="p-6 bg-background border-muted hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-poppins font-semibold text-foreground mb-4">
+                <h3 className="text-xl font-cormorant font-semibold text-foreground mb-4">
                   Education
                 </h3>
                 <div className="space-y-2">
-                  <p className="font-medium text-primary">B.Tech in ICT</p>
-                  <p className="text-muted-foreground">DA-IICT • Graduated 2024</p>
+                  <p className="font-medium text-primary font-montserrat">B.Tech in ICT</p>
+                  <p className="text-muted-foreground font-source">DA-IICT • Graduated 2024</p>
                 </div>
               </Card>
             </motion.div>
 
             <motion.div variants={cardVariants}>
               <Card className="p-6 bg-background border-muted hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-poppins font-semibold text-foreground mb-4">
+                <h3 className="text-xl font-cormorant font-semibold text-foreground mb-4">
                   Experience
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <p className="font-medium text-primary">Technical Expert</p>
-                    <p className="text-sm text-muted-foreground">Grras IT Solutions • Mentoring in Full Stack Dev</p>
+                    <p className="font-medium text-primary font-montserrat">Technical Expert</p>
+                    <p className="text-sm text-muted-foreground font-source">Grras IT Solutions • Mentoring in Full Stack Dev</p>
                   </div>
                   <div>
-                    <p className="font-medium text-primary">Software Intern</p>
-                    <p className="text-sm text-muted-foreground">Infixzon Pvt. Ltd. • Node.js + Firebase + AWS EC2</p>
+                    <p className="font-medium text-primary font-montserrat">Software Intern</p>
+                    <p className="text-sm text-muted-foreground font-source">Infixzon Pvt. Ltd. • Node.js + Firebase + AWS EC2</p>
                   </div>
                   <div>
-                    <p className="font-medium text-primary">Freelancer</p>
-                    <p className="text-sm text-muted-foreground">Ongoing web development projects</p>
+                    <p className="font-medium text-primary font-montserrat">Freelancer</p>
+                    <p className="text-sm text-muted-foreground font-source">Ongoing web development projects</p>
                   </div>
                 </div>
               </Card>
@@ -139,7 +139,7 @@ const About = () => {
 
             <motion.div variants={cardVariants}>
               <Card className="p-6 bg-background border-muted hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-poppins font-semibold text-foreground mb-4">
+                <h3 className="text-xl font-cormorant font-semibold text-foreground mb-4">
                   Skills
                 </h3>
                 <motion.div 
@@ -152,7 +152,7 @@ const About = () => {
                   {skills.map((skill, index) => (
                     <motion.span 
                       key={index}
-                      className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium cursor-pointer"
+                      className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium cursor-pointer font-montserrat"
                       variants={skillVariants}
                       whileHover={{ 
                         scale: 1.1,

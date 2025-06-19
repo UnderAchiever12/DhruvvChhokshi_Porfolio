@@ -65,7 +65,7 @@ const Hero = () => {
             animate="visible"
           >
             <motion.h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-poppins font-bold text-foreground mb-6"
+              className="text-5xl md:text-6xl lg:text-7xl font-cormorant font-bold text-foreground mb-6"
               variants={itemVariants}
             >
               Hi, I'm{" "}
@@ -79,14 +79,14 @@ const Hero = () => {
             </motion.h1>
             
             <motion.h2 
-              className="text-xl md:text-2xl text-muted-foreground mb-6 font-medium"
+              className="text-xl md:text-2xl text-muted-foreground mb-6 font-medium font-montserrat"
               variants={itemVariants}
             >
               Full Stack Developer | Content Creator | Curious Coder
             </motion.h2>
             
             <motion.p 
-              className="text-lg text-foreground/80 mb-8 max-w-2xl"
+              className="text-lg text-foreground/80 mb-8 max-w-2xl font-source"
               variants={itemVariants}
             >
               With 2 years of experience in web development, I love coding clean, efficient solutions and sharing my journey with others through creative content.

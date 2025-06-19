@@ -59,8 +59,7 @@ const Services = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.6
       }
     }
   };
@@ -75,10 +74,10 @@ const Services = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-poppins font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-cormorant font-bold text-foreground mb-6">
             My Services
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-montserrat">
             Comprehensive web development solutions to bring your ideas to life
           </p>
         </motion.div>
@@ -96,25 +95,25 @@ const Services = () => {
               variants={cardVariants}
               whileHover={{ 
                 y: -10,
-                transition: { type: "spring", stiffness: 300 }
+                transition: { type: "spring" as const, stiffness: 300 }
               }}
             >
               <Card className="p-6 bg-card border-muted hover:shadow-xl transition-all duration-300 group h-full">
                 <motion.div 
                   className="flex items-center mb-4"
                   whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400 }}
+                  transition={{ type: "spring" as const, stiffness: 400 }}
                 >
                   <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
                     <service.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                   </div>
                 </motion.div>
                 
-                <h3 className="text-xl font-poppins font-semibold text-foreground mb-3">
+                <h3 className="text-xl font-cormorant font-semibold text-foreground mb-3">
                   {service.title}
                 </h3>
                 
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+                <p className="text-muted-foreground mb-4 leading-relaxed font-source">
                   {service.description}
                 </p>
                 
@@ -137,7 +136,7 @@ const Services = () => {
                           delay: featureIndex * 0.2
                         }}
                       />
-                      <span className="text-foreground/80">{feature}</span>
+                      <span className="text-foreground/80 font-source">{feature}</span>
                     </motion.div>
                   ))}
                 </div>

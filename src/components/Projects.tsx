@@ -60,10 +60,10 @@ const Projects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-poppins font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-cormorant font-bold text-foreground mb-6">
             Featured Projects
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-montserrat">
             Real-world solutions showcasing my technical expertise and problem-solving abilities
           </p>
         </motion.div>
@@ -105,14 +105,14 @@ const Projects = () => {
                 
                 <div className="p-6">
                   <motion.h3 
-                    className="text-xl font-poppins font-semibold text-foreground mb-3"
+                    className="text-xl font-cormorant font-semibold text-foreground mb-3"
                     whileHover={{ color: "hsl(var(--primary))" }}
                     transition={{ duration: 0.2 }}
                   >
                     {project.title}
                   </motion.h3>
                   
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                  <p className="text-muted-foreground mb-4 leading-relaxed font-source">
                     {project.description}
                   </p>
                   
@@ -126,7 +126,7 @@ const Projects = () => {
                     {project.tech.map((tech, techIndex) => (
                       <motion.span 
                         key={techIndex}
-                        className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium"
+                        className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium font-montserrat"
                         whileHover={{ 
                           scale: 1.1,
                           backgroundColor: "hsl(var(--primary))",
@@ -158,7 +158,7 @@ const Projects = () => {
                             delay: featureIndex * 0.3
                           }}
                         />
-                        <span className="text-foreground/80">{feature}</span>
+                        <span className="text-foreground/80 font-source">{feature}</span>
                       </motion.div>
                     ))}
                   </div>

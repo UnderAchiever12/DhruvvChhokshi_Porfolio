@@ -77,8 +77,7 @@ const Contact = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.6
       }
     }
   };
@@ -89,8 +88,7 @@ const Contact = () => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        duration: 0.8
       }
     }
   };
@@ -130,7 +128,7 @@ const Contact = () => {
                   <motion.div
                     whileHover={{
                       x: 10,
-                      transition: { type: "spring", stiffness: 300 }
+                      transition: { type: "spring" as const, stiffness: 300 }
                     }}
                   >
                     <p className="font-medium text-primary">Email</p>
@@ -144,7 +142,7 @@ const Contact = () => {
                   <motion.div
                     whileHover={{
                       x: 10,
-                      transition: { type: "spring", stiffness: 300 }
+                      transition: { type: "spring" as const, stiffness: 300 }
                     }}
                   >
                     <p className="font-medium text-primary">Phone</p>
@@ -158,7 +156,7 @@ const Contact = () => {
                   <motion.div
                     whileHover={{
                       x: 10,
-                      transition: { type: "spring", stiffness: 300 }
+                      transition: { type: "spring" as const, stiffness: 300 }
                     }}
                   >
                     <p className="font-medium text-primary">LinkedIn</p>
@@ -174,7 +172,7 @@ const Contact = () => {
                   <motion.div
                     whileHover={{
                       x: 10,
-                      transition: { type: "spring", stiffness: 300 }
+                      transition: { type: "spring" as const, stiffness: 300 }
                     }}
                   >
                     <p className="font-medium text-primary">GitHub</p>

@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
@@ -8,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const Projects = () => {
   // Fetch projects from database
-  const { data: projects, isLoading } = useQuery({
+  const { data: databaseProjects, isLoading } = useQuery({
     queryKey: ['projects'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -21,9 +20,10 @@ const Projects = () => {
     }
   });
 
-  // Fallback projects if no data from database
+  // Original projects that should always be displayed
   const fallbackProjects = [
     {
+      id: 'fallback-1',
       title: "EPC Management System",
       description: "A comprehensive role-based system for construction workflows, enabling efficient project management and team collaboration.",
       image_url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=500&h=300&fit=crop",
@@ -33,6 +33,7 @@ const Projects = () => {
       demo_url: null
     },
     {
+      id: 'fallback-2',
       title: "Speed Detection System",
       description: "Advanced vehicle speed analysis system using computer vision for traffic monitoring and safety enhancement.",
       image_url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop",
@@ -42,6 +43,7 @@ const Projects = () => {
       demo_url: null
     },
     {
+      id: 'fallback-3',
       title: "CRM Software",
       description: "Complete customer relationship management solution with lead tracking, task management, and analytics dashboard.",
       image_url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop",
@@ -52,8 +54,8 @@ const Projects = () => {
     }
   ];
 
-  // Use database projects if available, otherwise use fallback
-  const displayProjects = projects && projects.length > 0 ? projects : fallbackProjects;
+  // Combine fallback projects with database projects
+  const allProjects = [...fallbackProjects, ...(databaseProjects || [])];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -114,9 +116,9 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {displayProjects.map((project, index) => (
+          {allProjects.map((project, index) => (
             <motion.div
-              key={project.id || index}
+              key={project.id || `project-${index}`}
               variants={projectVariants}
               whileHover={{ 
                 y: -10,

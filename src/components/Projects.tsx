@@ -3,31 +3,57 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Projects = () => {
-  const projects = [
+  // Fetch projects from database
+  const { data: projects, isLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      return data;
+    }
+  });
+
+  // Fallback projects if no data from database
+  const fallbackProjects = [
     {
       title: "EPC Management System",
       description: "A comprehensive role-based system for construction workflows, enabling efficient project management and team collaboration.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=500&h=300&fit=crop",
-      tech: ["Node.js", "Firebase", "AWS EC2"],
-      features: ["Role-based Access", "Workflow Management", "Real-time Updates"]
+      image_url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=500&h=300&fit=crop",
+      technologies: ["Node.js", "Firebase", "AWS EC2"],
+      features: ["Role-based Access", "Workflow Management", "Real-time Updates"],
+      github_url: null,
+      demo_url: null
     },
     {
       title: "Speed Detection System",
       description: "Advanced vehicle speed analysis system using computer vision for traffic monitoring and safety enhancement.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop",
-      tech: ["Python", "OpenCV", "Computer Vision"],
-      features: ["Real-time Detection", "Traffic Analysis", "Safety Monitoring"]
+      image_url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop",
+      technologies: ["Python", "OpenCV", "Computer Vision"],
+      features: ["Real-time Detection", "Traffic Analysis", "Safety Monitoring"],
+      github_url: null,
+      demo_url: null
     },
     {
       title: "CRM Software",
       description: "Complete customer relationship management solution with lead tracking, task management, and analytics dashboard.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop",
-      tech: ["React", "Node.js", "MongoDB"],
-      features: ["Lead Management", "Task Tracking", "Analytics Dashboard"]
+      image_url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop",
+      technologies: ["React", "Node.js", "MongoDB"],
+      features: ["Lead Management", "Task Tracking", "Analytics Dashboard"],
+      github_url: null,
+      demo_url: null
     }
   ];
+
+  // Use database projects if available, otherwise use fallback
+  const displayProjects = projects && projects.length > 0 ? projects : fallbackProjects;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -49,6 +75,19 @@ const Projects = () => {
       }
     }
   };
+
+  if (isLoading) {
+    return (
+      <section id="projects" className="section-padding bg-card">
+        <div className="container-max">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p>Loading projects...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="projects" className="section-padding bg-card">
@@ -75,9 +114,9 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {projects.map((project, index) => (
+          {displayProjects.map((project, index) => (
             <motion.div
-              key={index}
+              key={project.id || index}
               variants={projectVariants}
               whileHover={{ 
                 y: -10,
@@ -91,7 +130,7 @@ const Projects = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <img 
-                    src={project.image}
+                    src={project.image_url || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=500&h=300&fit=crop"}
                     alt={project.title}
                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -105,7 +144,7 @@ const Projects = () => {
                 
                 <div className="p-6">
                   <motion.h3 
-                    className="text-xl font-cormorant font-semibold text-foreground mb-3"
+                    className="text-xl font-cormorant font-sem;bold text-foreground mb-3"
                     whileHover={{ color: "hsl(var(--primary))" }}
                     transition={{ duration: 0.2 }}
                   >
@@ -123,7 +162,7 @@ const Projects = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                   >
-                    {project.tech.map((tech, techIndex) => (
+                    {(project.technologies || []).map((tech, techIndex) => (
                       <motion.span 
                         key={techIndex}
                         className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium font-montserrat"
@@ -140,7 +179,7 @@ const Projects = () => {
                   </motion.div>
 
                   <div className="space-y-1 mb-6">
-                    {project.features.map((feature, featureIndex) => (
+                    {(project.features || []).map((feature, featureIndex) => (
                       <motion.div 
                         key={featureIndex} 
                         className="flex items-center text-sm"
@@ -164,26 +203,58 @@ const Projects = () => {
                   </div>
                   
                   <div className="flex gap-3">
-                    <motion.div 
-                      className="flex-1"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Button size="sm" variant="outline" className="w-full">
-                        <Github className="w-4 h-4 mr-2" />
-                        Code
-                      </Button>
-                    </motion.div>
-                    <motion.div 
-                      className="flex-1"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Button size="sm" className="w-full">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Live Demo
-                      </Button>
-                    </motion.div>
+                    {project.github_url && (
+                      <motion.div 
+                        className="flex-1"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button size="sm" variant="outline" className="w-full" asChild>
+                          <a href={project.github_url} target="_blank" rel="noopener noreferrer">
+                            <Github className="w-4 h-4 mr-2" />
+                            Code
+                          </a>
+                        </Button>
+                      </motion.div>
+                    )}
+                    {project.demo_url && (
+                      <motion.div 
+                        className="flex-1"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button size="sm" className="w-full" asChild>
+                          <a href={project.demo_url} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Live Demo
+                          </a>
+                        </Button>
+                      </motion.div>
+                    )}
+                    {!project.github_url && !project.demo_url && (
+                      <>
+                        <motion.div 
+                          className="flex-1"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Button size="sm" variant="outline" className="w-full">
+                            <Github className="w-4 h-4 mr-2" />
+                            Code
+                          </Button>
+                        </motion.div>
+                        <motion.div 
+                          className="flex-1"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Button size="sm" className="w-full">
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Live Demo
+                          </Button>
+                        </motion.div>
+                      </>
+                    )}
                   </div>
                 </div>
               </Card>

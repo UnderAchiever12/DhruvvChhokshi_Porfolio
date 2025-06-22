@@ -1,15 +1,35 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, User, Settings, FileText } from 'lucide-react';
+import { LogOut, User, Settings, FileText, Plus } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import ProjectForm from '@/components/ProjectForm';
+import ProjectsList from '@/components/ProjectsList';
+import { Tables } from '@/integrations/supabase/types';
+
+type Project = Tables<'projects'>;
 
 const Admin = () => {
   const { user, isAdmin, signOut, loading } = useAuth();
   const navigate = useNavigate();
+  const [showProjectForm, setShowProjectForm] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
+
+  // Get projects count for dashboard
+  const { data: projectsCount } = useQuery({
+    queryKey: ['projects-count'],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from('projects')
+        .select('*', { count: 'exact', head: true });
+      return count || 0;
+    }
+  });
 
   if (loading) {
     return (
@@ -52,6 +72,26 @@ const Admin = () => {
     navigate('/');
   };
 
+  const handleAddProject = () => {
+    setEditingProject(null);
+    setShowProjectForm(true);
+  };
+
+  const handleEditProject = (project: Project) => {
+    setEditingProject(project);
+    setShowProjectForm(true);
+  };
+
+  const handleProjectSuccess = () => {
+    setShowProjectForm(false);
+    setEditingProject(null);
+  };
+
+  const handleProjectCancel = () => {
+    setShowProjectForm(false);
+    setEditingProject(null);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <header className="bg-card border-b">
@@ -80,9 +120,9 @@ const Admin = () => {
                 <FileText className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">0</div>
+                <div className="text-2xl font-bold">{projectsCount}</div>
                 <p className="text-xs text-muted-foreground">
-                  No projects yet
+                  {projectsCount === 0 ? 'No projects yet' : 'Active projects'}
                 </p>
               </CardContent>
             </Card>
@@ -128,20 +168,29 @@ const Admin = () => {
             <TabsContent value="projects" className="space-y-4">
               <Card>
                 <CardHeader>
-                  <CardTitle>Project Management</CardTitle>
-                  <CardDescription>
-                    Manage your portfolio projects here
-                  </CardDescription>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <CardTitle>Project Management</CardTitle>
+                      <CardDescription>
+                        Manage your portfolio projects here
+                      </CardDescription>
+                    </div>
+                    <Button onClick={handleAddProject}>
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add Project
+                    </Button>
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center py-8">
-                    <FileText className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">No Projects Yet</h3>
-                    <p className="text-muted-foreground mb-4">
-                      Start by adding your first project to showcase your work.
-                    </p>
-                    <Button>Add First Project</Button>
-                  </div>
+                  {showProjectForm ? (
+                    <ProjectForm
+                      project={editingProject}
+                      onSuccess={handleProjectSuccess}
+                      onCancel={handleProjectCancel}
+                    />
+                  ) : (
+                    <ProjectsList onEdit={handleEditProject} />
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>

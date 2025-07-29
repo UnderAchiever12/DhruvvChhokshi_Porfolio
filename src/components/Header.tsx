@@ -22,7 +22,7 @@ const Header = () => {
     <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
       <div className="container-max flex justify-between items-center py-4">
         <div className="font-cormorant text-2xl font-bold text-foreground">
-          Dhruvv Chhokshi
+          Dhruvv A C
         </div>
         
         {/* Desktop Navigation */}

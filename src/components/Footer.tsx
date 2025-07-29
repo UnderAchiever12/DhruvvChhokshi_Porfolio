@@ -8,7 +8,7 @@ const Footer = () => {
             Dhruvv Chhokshi
           </p>
           <p className="text-sm opacity-80 font-source">
-            © 2024 All rights reserved. Built with React & Tailwind CSS
+            © 2025 All rights reserved. Built with ❤️ in India.
           </p>
         </div>
       </div>

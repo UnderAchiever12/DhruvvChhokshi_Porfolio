@@ -29,7 +29,7 @@ const Projects = () => {
       image_url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=500&h=300&fit=crop",
       technologies: ["Node.js", "Firebase", "AWS EC2"],
       features: ["Role-based Access", "Workflow Management", "Real-time Updates"],
-      github_url: null,
+      github_url: 'https://github.com/UnderAchiever12/epc',
       demo_url: null
     },
     {
@@ -39,7 +39,7 @@ const Projects = () => {
       image_url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop",
       technologies: ["Python", "OpenCV", "Computer Vision"],
       features: ["Real-time Detection", "Traffic Analysis", "Safety Monitoring"],
-      github_url: null,
+      github_url: 'https://github.com/UnderAchiever12/speed_detection_system',
       demo_url: null
     },
     {
@@ -49,7 +49,7 @@ const Projects = () => {
       image_url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop",
       technologies: ["React", "Node.js", "MongoDB"],
       features: ["Lead Management", "Task Tracking", "Analytics Dashboard"],
-      github_url: null,
+      github_url: 'https://github.com/UnderAchiever12/crm_frontend',
       demo_url: null
     }
   ];

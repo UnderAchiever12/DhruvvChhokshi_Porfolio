@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    allowedHosts: ['dhruvvchhokshi-porfolio.onrender.com'], // ✅ This line fixes the issue
   },
   plugins: [
     react(),
